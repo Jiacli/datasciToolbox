@@ -1,0 +1,64 @@
+The sample of the Netflix Prize data has been split into 3 components: train/development/test.  The development and testing sets were created by sampling points from the training set, removing them, and adding them into either the development set or the testing set.  For convenience, we have replaced the original movie/user IDs with IDs that index from 0.
+
+There are four included files in this package:
+
+1.) training set (train.csv)
+2.) development set	(dev.csv)
+3.) development set	(dev.queries)
+4.) test set	(test.csv)
+5.) test set queries	(test.queries)
+
+
+
+
+Training set:
+-------------
+The training set is the input to the CF system, and consists of movie-user pairs, along with their rating.  The format of the data is as follows:
+
+"MovieID","UserID","Rating","RatingDate"
+MovieID1,UserID11,rating_score_for_UserID11_to_MovieID1,the_date_of_rating
+MovieID1,UserID12,rating_score_for_UserID12_to_MovieID1,the_date_of_rating
+
+where rating_score_for_UserID*_to_MovieID* are decimal values between 1.0 and 5.0 and dates have the format YYYY-MM-DD.
+
+Development set:
+----------------
+The development set consists of movie-user pairs, without a rating.  The format of the data is as follows:
+
+"MovieID","UserID"
+MovieID1,UserID11
+MovieID1,UserID12
+
+Your task is to predict the ratings of these pairs given the training data.
+
+Development set queries:
+------------------------
+For your convenience, we have also provided the user vectors from the training data corresponding to the users in the development set.  These are in the format:
+
+"UserID" "MovieID:Rating" "MovieID:Rating" ... "MovieID:Rating"
+
+Note: when finding the k-nearest neighbors for a query of User_i, please do not include User_i as one of the k-nearest neighbors!
+
+Test set format:
+------------------
+The test set and test queries are given in the same format as the development set.
+
+
+--------------------------------------------------------------------------------------------
+
+Output:
+-------
+
+Your program must read in the development set/test set file and produce a rating file in the following format:
+prediction_score_for_UserID11_to_MovieID1
+prediction_score_for_UserID12_to_MovieID1
+prediction_score_for_UserID13_to_MovieID1
+...
+prediction_score_for_UserID21_to_MovieID2
+prediction_score_for_UserID22_to_MovieID2
+prediction_score_for_UserID23_to_MovieID2
+
+Each line is a predicted rating which can be a real value on the interval [1,5]. Note that it is critical that the order in this file match the input file, and the answer file must contain answers to all the requested movie-user pairs; otherwise the evaluation script will not function correctly.
+
+
+
